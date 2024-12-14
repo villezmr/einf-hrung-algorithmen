@@ -22,14 +22,32 @@
       - [🐜 Wie ermitteln wir den kürzesten Weg von Imstadt nach Oppenheim?](#-wie-ermitteln-wir-den-kürzesten-weg-von-imstadt-nach-oppenheim)
       - [1️⃣ **Frage 1:** Wohin gelangt ihr nach 7 Minuten?](#1️⃣-frage-1-wohin-gelangt-ihr-nach-7-minuten)
       - [2️⃣ **Frage 2:** Wie geht es weiter?](#2️⃣-frage-2-wie-geht-es-weiter)
-        - [Kürzeste Strecke von F nach B](#kürzeste-strecke-von-f-nach-b)
+        - [Kürzeste Strecke von Imstadt nach Oppenheim](#kürzeste-strecke-von-imstadt-nach-oppenheim)
         - [📐 Dijkstra-Algorithmus: Der Weg zur Effizienz](#-dijkstra-algorithmus-der-weg-zur-effizienz)
           - [🚀 Was ist der Dijkstra-Algorithmus?](#-was-ist-der-dijkstra-algorithmus)
           - [🔍 Wie funktioniert der Dijkstra-Algorithmus?](#-wie-funktioniert-der-dijkstra-algorithmus)
           - [📋 Schritte:](#-schritte)
-    - [Tiefgang 4](#tiefgang-4)
+    - [Tiefgang 4 von Lupera (J) nach Eindhofen (E)](#tiefgang-4-von-lupera-j-nach-eindhofen-e)
+      - [Ausgangssituation](#ausgangssituation)
+        - [Schritte des Verfahrens](#schritte-des-verfahrens)
+          - [1. **Startpunkt markieren**](#1-startpunkt-markieren)
+          - [2. **Nachbarstädte untersuchen**](#2-nachbarstädte-untersuchen)
+          - [3. **Strecken von AK2**](#3-strecken-von-ak2)
+          - [4. **Strecken von K**](#4-strecken-von-k)
+          - [5. **Strecken von AK3**](#5-strecken-von-ak3)
+          - [6. **Strecken von O**](#6-strecken-von-o)
+          - [Ergebnis](#ergebnis)
+          - [Grafische Darstellung](#grafische-darstellung)
     - [Tiefgang 5](#tiefgang-5)
-    - [Exkurs Graph](#exkurs-graph)
+  - [Exkurs Graph](#exkurs-graph)
+    - [Gegebene Geschwindigkeiten:](#gegebene-geschwindigkeiten)
+    - [Fahrzeitberechnung](#fahrzeitberechnung)
+      - [1. Imstadt nach Budingen (7 km, Landstraße, 80 km/h)](#1-imstadt-nach-budingen-7-km-landstraße-80-kmh)
+      - [2. Imstadt nach Chelzey (8,2 km, Gemeindestraße, 50 km/h)](#2-imstadt-nach-chelzey-82-km-gemeindestraße-50-kmh)
+      - [3. Imstadt nach Morbach (9,0 km, Landstraße, 80 km/h)](#3-imstadt-nach-morbach-90-km-landstraße-80-kmh)
+      - [4. Imstadt nach Hundorf (13,4 km, Gemeindestraße, 50 km/h)](#4-imstadt-nach-hundorf-134-km-gemeindestraße-50-kmh)
+      - [5. Imstadt nach Pappstadt (10,5 km, Landstraße, 80 km/h)](#5-imstadt-nach-pappstadt-105-km-landstraße-80-kmh)
+    - [Hinweis zu Ortsdurchfahrten:](#hinweis-zu-ortsdurchfahrten)
 
 ---
 
@@ -100,7 +118,7 @@ flowchart TD
     B[Oppenheim]
     C[Pappstadt]
     D[Fluxing]
-    E[Eidenhof]
+    E[Eindhofen]
     F[Imstadt]
     G[Hundorf]
     H[Krusping]
@@ -376,10 +394,10 @@ graph TD
     O -->|5.8| B
     class F,K,AK2,J,N,P,O,B highlight;
 ```
-##### Kürzeste Strecke von F nach B
+##### Kürzeste Strecke von Imstadt nach Oppenheim
 
 📌 **Berechnung der Strecke:**  
-Die kürzeste Strecke von F nach B beträgt **24,8 Einheiten**, und der Pfad lautet:  
+Die kürzeste Strecke von F(Imstadt) nach B(Oppenheim) beträgt **24,8 Einheiten**, und der Pfad lautet:  
 `F → G → H → AK1 → AK2 → B`
 
 ---
@@ -452,11 +470,171 @@ flowchart TD
 
 ---
 
-### Tiefgang 4
+### Tiefgang 4 von Lupera (J) nach Eindhofen (E)
+
+#### Ausgangssituation  
+Der Dijkstra-Algorithmus wird verwendet, um den kürzesten Weg von **J** (Startpunkt) nach **E** (Zielpunkt) in einem gewichteten Graphen zu bestimmen. Dabei werden alle Nachbarstädte der aktuellen Stadt geprüft und die kürzeste Strecke durch Summation der bereits berechneten Kennzahl mit der Länge der Verbindung ermittelt. Die optimale Route wird schrittweise aufgebaut, indem alle erreichbaren Wege berücksichtigt werden.
+
+---
+
+##### Schritte des Verfahrens  
+
+###### 1. **Startpunkt markieren**  
+Die Startstadt **J** erhält die Kennzahl 0 und wird zur **aktuellen Stadt**.
+
+---
+
+###### 2. **Nachbarstädte untersuchen**  
+Von der aktuellen Stadt **J** aus werden die Nachbarstädte geprüft:  
+- **J → AK2** (7,8)  
+- **J → N** (18,9)  
+
+Die **Summe** der aktuellen Kennzahl (0) und der Streckenlängen wird berechnet:  
+- **AK2**: \( 0 + 7,8 = 7,8 \)  
+- **N**: \( 0 + 18,9 = 18,9 \)  
+
+Die kleinere Kennzahl (**7,8**) wird markiert. **AK2** wird als nächste Stadt ausgewählt.
+
+---
+
+###### 3. **Strecken von AK2**  
+Von **AK2** aus werden folgende Nachbarn untersucht:  
+- **AK2 → K** (6,2)  
+
+Die Kennzahl für **K** wird berechnet:  
+\( 7,8 + 6,2 = 14,0 \).  
+
+Da **K** noch nicht markiert ist, wird sie mit **14,0** versehen.
+
+---
+
+###### 4. **Strecken von K**  
+Von **K** aus werden Nachbarstädte geprüft:  
+- **K → AK3** (4,9)  
+- **K → N** (13,0)  
+
+Berechnungen:  
+- **AK3**: \( 14,0 + 4,9 = 18,9 \)  
+- **N**: \( 14,0 + 13,0 = 27,0 \)  
+
+**AK3** erhält die Kennzahl **18,9** (besser als N).
+
+---
+
+###### 5. **Strecken von AK3**  
+Von **AK3** aus:  
+- **AK3 → O** (6,4)  
+
+Berechnung:  
+\( 18,9 + 6,4 = 25,3 \).  
+**O** wird markiert mit **25,3**.
+
+---
+
+###### 6. **Strecken von O**  
+Von **O** aus:  
+- **O → E** (direkte Verbindung)  
+
+Berechnung:  
+\( 25,3 + 5,8 = 31,1 \).
+
+---
+
+###### Ergebnis  
+Der kürzeste Weg von **J** nach **E** beträgt **31,1** Einheiten. Der Algorithmus hat dabei verschiedene Pfade untersucht, um die optimale Route zu finden.
+
+---
+
+###### Grafische Darstellung  
+1. Makiere die Startstadt (J) Rot weise ihr die Kennzahl 0 zu Bezeichen dies als aktuellen Stadt.
+2. Gehe aus von der aktuellen Stadt zu allen direkt erreichbaren Nachbarstädte  
+   1. znd führe das folgende für jede Nachbarsatdt durch, die noch nicht rot makiert ist:
+      1. Errechne die Summe au der roten Kenntahl an der aktuellen Stadt und der Streckenlänge zur Nachbarstadt
+         - Hat die Nachbarstadt keine Kennzahl weise ihr die Summe als Kennzahl zu. Makiere die Strecke zur aktuellen Stadt.
+         - Hat die Nachbarstast eine Kennzahl kleiner oder gleich der Summe mache nichts
+         - Hat die Nachbarstadt eine Kennzahl größer der Summe Streiche die dortige Kennzahl sowie die Makierung zu Makiere die Stecke zur aktuellen Stadt
+3. Betrachte alle STädte, die zwar eine rote Kennzahl haben aber nicht Rot Makiert sind. Suche die kleinste Kennzahl.
+4. Bezeichne diese als aktuelle Stadt. Weise mehre Städte die kleinste Kennzahl auf, wähle eine belibige davon.
+5. Makiere die aktuelle stadt Rot, zeichne die dort makierte Strecke komplett rot nach.
+6. Falls die Ziel stadt noch nicht rot makiert ist, weiter bei Schritt 2.(While-Loop)
+
+
+```mermaid
+flowchart TD
+    A[Quickstedt]
+    B[Oppenheim]
+    C[Pappstadt]
+    D[Fluxing]
+    E[Eindhofen]
+    F[Imstadt]
+    G[Hundorf]
+    H[Krusping]
+    I[Giwelau]
+    J((Lupera)):::red
+    K[Budingen]
+    L[Morbach]
+    M[Chelzey]
+    N[Delgar]
+    O[Arlhausen]
+    P[Niedergau]
+    AK1(Autobahnkreuz 1)
+    AK2(Autobahnkreuz 2):::visited
+    AK3(Autobahnkreuz 3)
+
+    J -->|7,8| AK2:::red
+    J -->|18,9| N
+    AK2 -->|6,2| K:::red
+    K -->|4,9| AK3:::red
+    AK3 -->|6,4| O:::red
+    O -->|5,8| E:::target
+
+    A -->|5,3| B
+    B -->|18,2| C
+    B -->|2,9| D
+    B -->|19,5| E
+    C -->|11,6| D
+    C -->|15,4| F
+    C -->|10,5| F
+    C -->|7,1| G
+    C -->|7,1| H
+    D -->|15,6| E
+    D -->|6,1| H
+    E -->|12,1| I
+    E -->|6,2| H
+    F -->|13,4| G
+    F -->|7,0| K
+    F -->|9,0| L
+    F -->|9,0| M
+    G --> |6,0| H
+    G --> |5,9| AK1 
+    G --> |21,1| J 
+    G --> |5,6| K
+    H --> |11,5| I
+    H --> |3,6| AK1
+    I --> |11,8| J
+    I --> |5,5| AK1
+    K --> |13,0| N
+    K --> |14,3| O
+    L --> |5,6| M
+    L --> |6,7| O
+    L --> |2,3| AK3
+    M --> |4,6| AK3
+    N --> |2,5| N
+    N --> |6,6| O
+    N --> |4,1| P
+    O --> |3,8| P
+    AK1 --> |4,5| AK2
+
+    classDef start fill:#ff0000,stroke:#900,stroke-width:3px;
+    classDef visited fill:#ffcccc,stroke:#900,stroke-width:2px;
+    classDef red fill:#ff4444,stroke:#900,stroke-width:2px;
+    classDef target fill:#00ff00,stroke:#080,stroke-width:3px;
+
+```
 
 ### Tiefgang 5
 
-### Exkurs Graph 
+## Exkurs Graph 
 ```
     o
    /|\
@@ -538,3 +716,57 @@ Der Text macht aber auch deutlich, dass "NP" eigentlich nicht "nicht praktisch l
 
 **Zusammengefasst📝:**  
 Die Frage ist eine der wichtigsten Herausforderungen in der Informatik und könnte viele schwierige Probleme auf einmal klären.
+
+
+**Berechne📈** nun die Zeit für eine Fahrt von Imstadt nach Budingen
+
+
+
+### Gegebene Geschwindigkeiten:
+- **Autobahnen**: 130 km/h
+- **Landstraße** (gelb, rot): 80 km/h
+- **Gemeindestraßen** (weiß): 50 km/h
+- **Ortsdurchfahrten**: Zusätzliche 8 Minuten (gilt auch bei Autobahnen, wenn sie einen Ort durchqueren)
+
+### Fahrzeitberechnung
+
+Die **Fahrzeit (in Stunden)** wird berechnet mit der Formel:
+
+\[
+\text{Fahrzeit (in Stunden)} = \frac{\text{Streckenlänge (in km)}}{\text{Geschwindigkeit (in km/h)}}
+\]
+
+Falls die Strecke durch eine **Ortsdurchfahrt** führt, fügen wir 8 Minuten hinzu.
+
+#### 1. Imstadt nach Budingen (7 km, Landstraße, 80 km/h)
+
+\[
+\text{Fahrzeit} = \frac{7 \, \text{km}}{80 \, \text{km/h}} = 0,0875 \, \text{Stunden} = 5,25 \, \text{Minuten}
+\]
+
+#### 2. Imstadt nach Chelzey (8,2 km, Gemeindestraße, 50 km/h)
+
+\[
+\text{Fahrzeit} = \frac{8,2 \, \text{km}}{50 \, \text{km/h}} = 0,164 \, \text{Stunden} = 9,84 \, \text{Minuten}
+\]
+
+#### 3. Imstadt nach Morbach (9,0 km, Landstraße, 80 km/h)
+
+\[
+\text{Fahrzeit} = \frac{9,0 \, \text{km}}{80 \, \text{km/h}} = 0,1125 \, \text{Stunden} = 6,75 \, \text{Minuten}
+\]
+
+#### 4. Imstadt nach Hundorf (13,4 km, Gemeindestraße, 50 km/h)
+
+\[
+\text{Fahrzeit} = \frac{13,4 \, \text{km}}{50 \, \text{km/h}} = 0,268 \, \text{Stunden} = 16,08 \, \text{Minuten}
+\]
+
+#### 5. Imstadt nach Pappstadt (10,5 km, Landstraße, 80 km/h)
+
+\[
+\text{Fahrzeit} = \frac{10,5 \, \text{km}}{80 \, \text{km/h}} = 0,13125 \, \text{Stunden} = 7,875 \, \text{Minuten}
+\]
+
+### Hinweis zu Ortsdurchfahrten:
+Falls eine der Strecken eine Ortsdurchfahrt enthält, müssen wir zusätzlich 8 Minuten berücksichtigen. Wir haben diese Information aber noch nicht für jede Strecke.
