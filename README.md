@@ -27,21 +27,28 @@
           - [🚀 Was ist der Dijkstra-Algorithmus?](#-was-ist-der-dijkstra-algorithmus)
           - [🔍 Wie funktioniert der Dijkstra-Algorithmus?](#-wie-funktioniert-der-dijkstra-algorithmus)
           - [📋 Schritte:](#-schritte)
-    - [Tiefgang 4 von Lupera (J) nach Eindhofen (E)](#tiefgang-4-von-lupera-j-nach-eindhofen-e)
-      - [Grafische Darstellung](#grafische-darstellung)
+    - [🌐 Tiefgang 4: Von Lupera (📍 **J**) nach Eindhofen (🏁 **E**)](#-tiefgang-4-von-lupera--j-nach-eindhofen--e)
+      - [🚦 **1. Starte in der Stadt J**](#-1-starte-in-der-stadt-j)
+      - [🛠️ **2. Bearbeite alle Nachbarstädte der aktuellen Stadt**](#️-2-bearbeite-alle-nachbarstädte-der-aktuellen-stadt)
+      - [🎯 **3. Wähle die nächste Stadt**](#-3-wähle-die-nächste-stadt)
+      - [🟥 **4. Markiere die nächste Stadt**](#-4-markiere-die-nächste-stadt)
+      - [🏁 **5. Überprüfe das Ziel**](#-5-überprüfe-das-ziel)
+      - [🏆 **6. Ende des Algorithmus**](#-6-ende-des-algorithmus)
+      - [📊 **Grafische Darstellung**](#-grafische-darstellung)
     - [Tiefgang 5](#tiefgang-5)
+      - [📌 Aufgabe  1](#-aufgabe--1)
+      - [📌 Aufgabe  2](#-aufgabe--2)
   - [Exkurs Graph](#exkurs-graph)
   - [Berechnung der Fahrzeiten](#berechnung-der-fahrzeiten)
     - [Gegebene Geschwindigkeiten:](#gegebene-geschwindigkeiten)
     - [Fahrzeitberechnung](#fahrzeitberechnung)
-      - [1. Imstadt nach Budingen (7 km, Landstraße, 80 km/h)](#1-imstadt-nach-budingen-7-km-landstraße-80-kmh)
-      - [2. Imstadt nach Chelzey (8,2 km, Gemeindestraße, 50 km/h)](#2-imstadt-nach-chelzey-82-km-gemeindestraße-50-kmh)
-      - [3. Imstadt nach Morbach (9,0 km, Landstraße, 80 km/h)](#3-imstadt-nach-morbach-90-km-landstraße-80-kmh)
-      - [4. Imstadt nach Hundorf (13,4 km, Gemeindestraße, 50 km/h)](#4-imstadt-nach-hundorf-134-km-gemeindestraße-50-kmh)
-      - [5. Imstadt nach Pappstadt (10,5 km, Landstraße, 80 km/h)](#5-imstadt-nach-pappstadt-105-km-landstraße-80-kmh)
-    - [Hinweis zu Ortsdurchfahrten:](#hinweis-zu-ortsdurchfahrten)
-
----
+      - [1. Imstadt nach Budingen (7 km, Landstraße, 80 km/h)🚗](#1-imstadt-nach-budingen-7-km-landstraße-80-kmh)
+      - [2. Imstadt nach Chelzey (8,2 km, Gemeindestraße, 50 km/h)🚗](#2-imstadt-nach-chelzey-82-km-gemeindestraße-50-kmh)
+      - [3. Imstadt nach Morbach (9,0 km, Landstraße, 80 km/h)🚗](#3-imstadt-nach-morbach-90-km-landstraße-80-kmh)
+      - [4. Imstadt nach Hundorf (13,4 km, Gemeindestraße, 50 km/h)🚗](#4-imstadt-nach-hundorf-134-km-gemeindestraße-50-kmh)
+      - [5. Imstadt nach Pappstadt (10,5 km, Landstraße, 80 km/h)🚗](#5-imstadt-nach-pappstadt-105-km-landstraße-80-kmh)
+    - [Grafiz](#grafiz)
+  
 
 ## Plan 0
 
@@ -333,7 +340,7 @@ Setzen wir also die Ameisen auf den Ausgangspunkt **Imstadt** (Ⓘ). Fünf Wege 
 📌 **Aufgabe:**  
 Färbt auf der Karte die Wege der Ameisen ein und betrachtet das Bild nach „7 min“. Was bedeutet das? Speichert ein Bild der Karte als Zwischenstand und formuliert einen Antwortsatz.
 
-![SVG Image](./assets/images/plan_1_tiefgang_3.drawio.svg)
+![Abb 1](./assets/images/plan_1_tiefgang_3.jpeg)
 
 ---
 
@@ -462,40 +469,50 @@ flowchart TD
 
 ---
 
-### Tiefgang 4 von Lupera (J) nach Eindhofen (E)
+### 🌐 Tiefgang 4: Von Lupera (📍 **J**) nach Eindhofen (🏁 **E**)
 
-1. **Starte in der Stadt J**:
-   - Markiere die Stadt **J** **rot** und weise ihr die Kennzahl **0** zu.
-   - Bezeichne **J** als **aktuelle Stadt**.
-
-2. **Bearbeite alle Nachbarstädte der aktuellen Stadt**:
-   - Gehe zu allen direkt erreichbaren **Nachbarstädten**, die **noch nicht rot markiert** sind.
-   - Führe für jede Nachbarstadt die folgenden Schritte aus:
-     1. Berechne die **Summe** aus der Kennzahl der aktuellen Stadt (rote Zahl) und der **Streckenlänge** zur Nachbarstadt.
-     2. Überprüfe die Nachbarstadt:
-        - **Keine Kennzahl vorhanden**: Weise die berechnete Summe als neue Kennzahl zu. Markiere die Strecke zur aktuellen Stadt.
-        - **Kennzahl kleiner oder gleich der Summe**: Nichts tun.
-        - **Kennzahl größer als die Summe**: Lösche die bisherige Kennzahl und die Markierung zur bisherigen Stadt. Markiere die Strecke zur aktuellen Stadt neu.
-
-3. **Wähle die nächste Stadt**:
-   - Betrachte alle Städte, die bereits eine **rote Kennzahl** haben, aber noch nicht **rot markiert** sind.
-   - Suche die Stadt mit der **kleinsten Kennzahl**.
-     - Falls mehrere Städte die **gleiche kleinste Kennzahl** haben, wähle eine davon **beliebig** aus.
-
-4. **Markiere die nächste Stadt**:
-   - Bezeichne die Stadt mit der kleinsten Kennzahl als **aktuelle Stadt**.
-   - Markiere die Stadt **rot** und zeichne die zugehörige Strecke komplett **rot** nach.
-
-5. **Überprüfe das Ziel**:
-   - Falls die **Zielstadt E** noch **nicht rot markiert** ist, kehre zurück zu **Schritt 2** (While-Loop).
-
-6. **Ende des Algorithmus**:
-   - Sobald die Zielstadt **E rot markiert** ist, endet der Algorithmus.
-   - Der kürzeste Weg von Stadt **J** nach Stadt **E** wurde erfolgreich gefunden.
+#### 🚦 **1. Starte in der Stadt J**  
+- 🟥 Markiere die Stadt **J** **rot** und weise ihr die Kennzahl **0** zu.  
+- 🔄 Bezeichne **J** als **aktuelle Stadt**.
 
 ---
 
-#### Grafische Darstellung  
+#### 🛠️ **2. Bearbeite alle Nachbarstädte der aktuellen Stadt**  
+- 🌟 Gehe zu allen direkt erreichbaren **Nachbarstädten**, die **noch nicht rot markiert** sind.  
+- 📋 Für jede Nachbarstadt führe folgende Schritte aus:  
+  1️⃣ **Berechne** die **Summe** aus der Kennzahl der aktuellen Stadt (rote Zahl) und der **Streckenlänge** zur Nachbarstadt.  
+  2️⃣ **Überprüfe** die Nachbarstadt:  
+     - 🆕 **Keine Kennzahl vorhanden**: Weise die berechnete Summe als neue Kennzahl zu. Markiere die Strecke zur aktuellen Stadt.  
+     - ✅ **Kennzahl kleiner oder gleich der Summe**: Nichts tun.  
+     - 🔄 **Kennzahl größer als die Summe**: Lösche die bisherige Kennzahl und die Markierung zur bisherigen Stadt. Markiere die Strecke zur aktuellen Stadt neu.  
+
+---
+
+#### 🎯 **3. Wähle die nächste Stadt**  
+- 🔍 Betrachte alle Städte, die bereits eine **rote Kennzahl** haben, aber noch nicht **rot markiert** sind.  
+- 📊 Suche die Stadt mit der **kleinsten Kennzahl**.  
+  - ⚖️ Falls mehrere Städte die **gleiche kleinste Kennzahl** haben, wähle eine davon **beliebig** aus.
+
+---
+
+#### 🟥 **4. Markiere die nächste Stadt**  
+- 🏷️ Bezeichne die Stadt mit der kleinsten Kennzahl als **aktuelle Stadt**.  
+- 🟥 Markiere die Stadt **rot** und zeichne die zugehörige Strecke komplett **rot** nach.
+
+---
+
+#### 🏁 **5. Überprüfe das Ziel**  
+- ❓ Falls die **Zielstadt E** noch **nicht rot markiert** ist, kehre zurück zu **Schritt 2** (🔁 While-Loop).
+
+---
+
+#### 🏆 **6. Ende des Algorithmus**  
+- ✅ Sobald die Zielstadt **E rot markiert** ist, endet der Algorithmus.  
+- 🚀 Der kürzeste Weg von Stadt **J** nach Stadt **E** wurde erfolgreich gefunden.
+
+---
+
+#### 📊 **Grafische Darstellung**
 
 ```mermaid
 flowchart TD
@@ -571,6 +588,101 @@ flowchart TD
 ```
 
 ### Tiefgang 5
+
+#### 📌 Aufgabe  1
+
+Bearbeite die Karte für ein Routing: Anwenden von Abstraktion und Gleichformen und Achtung: Einbahnstraßen und Kreuzungen beachten! Wähle also für jeden relevanten Punkt, an dem sich die Fahrtrichtung maßgeblich verändert einen Marker (z.B. Zahl, besser Buchstaben), zeichne sie in die Karte und speichere das Ergebnis.
+
+Die Städte bekommen werden mit ihren anfangsbuchstarben abgekürzt und bekommen eine Rechteck ohne Runden:
+
+```mermaid
+flowchart TD
+  P[Niedergau] --> |Wird zu| D[N]
+```
+
+Kreuzungen, die nicht auf eine Ortschaft zurückzuführen sind werden durch nummeriert und bekommen abgerundete Ecken:
+
+```mermaid
+flowchart TD
+  P(Autobahnkreuz 1) --> |Wird zu| D(1)
+```
+
+Somit wird die alte Karte zu:
+
+```mermaid
+flowchart TD
+    A[Q]
+    B[O]
+    C[P]
+    D[F]
+    E[E]
+    F[I]
+    G[H]
+    H[K]
+    I[G]
+    J[L]
+    K[B]
+    L[M]
+    M[C]
+    N[D]
+    O[A]
+    P[N]
+    AK1(1)
+    AK2(2)
+    AK3(3)
+    
+    A -->|5,3€| B
+    B -->|18,2€| C
+    B -->|2,9€| D
+    B -->|19,5€| E
+    C -->|11,6€| D
+    C -->|15,4€| F
+    C -->|10,5€| F
+    C -->|7,1€| G
+    C -->|7,1€| H
+    D -->|15,6€| E
+    D -->|6,1€| H
+    E -->|12,1€| I
+    E -->|6,2€| H
+    F -->|13,4€| G
+    F -->|7,0€| K
+    F -->|9,0€| L
+    F -->|9,0€| M
+    G --> |6,0€| H
+    G --> |5,9€| AK1 
+    G --> |21,1€| J 
+    G --> |5,6€| K
+    H --> |11,5€| I
+    H --> |3,6€| AK1
+    I--> |11,8€| J
+    I--> |5,5€| AK1
+    J --> |18,9€| N
+    J --> |7,8€| AK2
+    K --> |6,2€| AK2
+    K --> |4,9€| AK3
+    K --> |13,0€| N
+    K --> |14,3€| O
+    L --> |5,6€| M
+    L --> |6,7€| O
+    L --> |2,3€| AK3
+    M --> |4,6€| AK3
+    N --> |2,5€| N
+    N --> |6,6€| O
+    N --> |6,6€| O
+    N --> |4,1€| P
+    O --> |3,8€| P
+    O --> |5,8€| AK2
+    O --> |6,4€| AK3
+    AK1 --> |4,5€| AK2
+```
+
+---
+
+#### 📌 Aufgabe  2
+
+Erstelle aus den Daten eine abstrakte Karte von Schilda (analog zu den vorangegangenen Karten)
+
+
 
 ## Exkurs Graph 
 ```
@@ -679,36 +791,104 @@ $$
 
 Falls die Strecke durch eine **Ortsdurchfahrt** führt, fügen wir 8 Minuten hinzu.
 
-#### 1. Imstadt nach Budingen (7 km, Landstraße, 80 km/h)
+#### 1. Imstadt nach Budingen (7 km, Landstraße, 80 km/h)🚗
 
 $$
 \text{Fahrzeit} = \frac{7 \, \text{km}}{80 \, \text{km/h}} = 0,0875 \, \text{Stunden} = 5,25 \, \text{Minuten}
 $$
 
-#### 2. Imstadt nach Chelzey (8,2 km, Gemeindestraße, 50 km/h)
+#### 2. Imstadt nach Chelzey (8,2 km, Gemeindestraße, 50 km/h)🚗
 
 $$
 \text{Fahrzeit} = \frac{8,2 \, \text{km}}{50 \, \text{km/h}} = 0,164 \, \text{Stunden} = 9,84 \, \text{Minuten}
 $$
 
-#### 3. Imstadt nach Morbach (9,0 km, Landstraße, 80 km/h)
+#### 3. Imstadt nach Morbach (9,0 km, Landstraße, 80 km/h)🚗
 
 $$
 \text{Fahrzeit} = \frac{9,0 \, \text{km}}{80 \, \text{km/h}} = 0,1125 \, \text{Stunden} = 6,75 \, \text{Minuten}
 $$
 
-#### 4. Imstadt nach Hundorf (13,4 km, Gemeindestraße, 50 km/h)
+#### 4. Imstadt nach Hundorf (13,4 km, Gemeindestraße, 50 km/h)🚗
 
 $$
 \text{Fahrzeit} = \frac{13,4 \, \text{km}}{50 \, \text{km/h}} = 0,268 \, \text{Stunden} = 16,08 \, \text{Minuten}
 $$
 
-#### 5. Imstadt nach Pappstadt (10,5 km, Landstraße, 80 km/h)
+#### 5. Imstadt nach Pappstadt (10,5 km, Landstraße, 80 km/h)🚗
 
 $$
 \text{Fahrzeit} = \frac{10,5 \, \text{km}}{80 \, \text{km/h}} = 0,13125 \, \text{Stunden} = 7,875 \, \text{Minuten}
 $$
 
-### Hinweis zu Ortsdurchfahrten:
-Falls eine der Strecken eine Ortsdurchfahrt enthält, müssen wir zusätzlich 8 Minuten berücksichtigen. Wir haben diese Information aber noch nicht für jede Strecke.
+**Antwort💬** Der Weg von Imstadt nach Budingen ist der richtige, und der Algorithmus muss nicht weiter nach einem kürzeren oder schnelleren Weg suchen, da dieser bereits die optimale Lösung darstellt.
 
+**Exkurs Probleme lösen**
+
+**Aufgabe 1💻**
+
+![PAP](./assets/images/PAP_Abb.png)
+
+| Abbildungs Punkt                     | Erklärung                                                                                      |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------- |
+| Problem                              | Berechnung der kürzesten Wege in einem gewichteten Graph                                       |
+| Abstraktion                          | Vereinfachug des Problems zu einem Graphen mit Knoten und Kanten                               |
+| modelhaftes Problem                  | Der Graph wird als Modell für das Problem verwendet, mit dem Ziel, den kürzesten Weg zu finden |
+| Erfahrung, Recherche, Intelligenz    |                                                                                                |
+| intuitive Lösung                     | Startknoten festlegen, dann den kürzersten Weg weg zu anderen Knoten finden                    |
+| Modellierung                         | Nutzung einer Prioritätswarteschlange für die Entfernungen                                     |
+| formalisierte Lösung (Datenstruktur) | Nutzung einer Prioritätswarteschlange zur Speicherung der Distanzen                            |
+| Analyse, Reflexion                   | Analye der Effizenz des Algorithmus und Sicherstellung seiner Richtigkeit                      |
+| Implementierung                      | Der Algorithmus wurde in eine Programmiersprache umgesetzt                                     |
+| Programm                             | Das fertige Programm berechnet die kürzesten Wege in einem Graphen                             |
+
+
+**Pseudocode 💻**
+
+```
+Funktion Suche(Stadt, aktuelleEntfernung)
+    Wenn Stadt == Zielstadt:
+        Wenn aktuelleEntfernung < Optimum:
+            Optimum = aktuelleEntfernung
+        Rückgabe
+        
+    Markiere Stadt als rot
+    Setze Kennzahl(Stadt) = aktuelleEntfernung
+
+    Für jede Nachbarstadt in Stadt.Nachbarn:
+        Wenn Nachbarstadt nicht markiert:
+            Summe = aktuelleEntfernung + Entfernung(Stadt, Nachbarstadt)
+            Suche(Nachbarstadt, Summe)
+
+    Entferne Markierung von Stadt
+    Lösche Kennzahl(Stadt)
+```
+
+
+
+**Dreiecksungleichung**
+
+**Die Dreiecksungleichung📐** besagt, dass die Summe der Längen zweier Seiten eines Dreiecks immer größer ist als die Länge der dritten Seite. In mathematischer Form: 𝑎 + 𝑏 > 𝑐 , 𝑎 + 𝑐 > 𝑏 , 𝑏 + 𝑐 > 𝑎 a+b>c,a+c>b,b+c>a Das bedeutet: Der Umweg über zwei Seiten eines Dreiecks ist immer länger als der direkte Weg.
+
+**Die Regel📜** hängt damit zusammen, dass die kürzeste Verbindung zwischen zwei Punkten immer eine gerade Linie ist. Wenn du zwei Punkte über einen Zwischenpunkt verbindest (wie bei einem Umweg), dann wird der Weg immer länger oder gleich lang, aber niemals kürzer.
+
+```mermaid
+graph TD
+    A((A: Startpunkt)) -->|AL| L((L: Landmarke))
+    B((B: Zielpunkt)) -->|BL| L
+    A -->|AB| B
+
+    subgraph Dreiecksungleichungen
+        Ungleichung1["AB + AL > BL"]
+        Ungleichung2["AB + BL > AL"]
+        Ungleichung3["AL + BL > AB"]
+    end
+
+    L --> Ungleichung1
+    L --> Ungleichung2
+    L --> Ungleichung3
+
+```
+
+### Grafiz
+[Graf-iz](./assets/graphiz/Vorlage_Graf-iz%20OzD.pdf)
