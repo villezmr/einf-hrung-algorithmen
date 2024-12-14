@@ -38,16 +38,32 @@
     - [Tiefgang 5](#tiefgang-5)
       - [📌 Aufgabe  1](#-aufgabe--1)
       - [📌 Aufgabe  2](#-aufgabe--2)
+      - [📌 Aufgabe  3](#-aufgabe--3)
+        - [🚕 Startpunkt Adler](#-startpunkt-adler)
+        - [🚕 Startpunkt Kapitol](#-startpunkt-kapitol)
+        - [🚕 Startpunkt Fromm](#-startpunkt-fromm)
   - [Exkurs Graph](#exkurs-graph)
-  - [Berechnung der Fahrzeiten](#berechnung-der-fahrzeiten)
-    - [Gegebene Geschwindigkeiten:](#gegebene-geschwindigkeiten)
-    - [Fahrzeitberechnung](#fahrzeitberechnung)
-      - [1. Imstadt nach Budingen (7 km, Landstraße, 80 km/h)🚗](#1-imstadt-nach-budingen-7-km-landstraße-80-kmh)
-      - [2. Imstadt nach Chelzey (8,2 km, Gemeindestraße, 50 km/h)🚗](#2-imstadt-nach-chelzey-82-km-gemeindestraße-50-kmh)
-      - [3. Imstadt nach Morbach (9,0 km, Landstraße, 80 km/h)🚗](#3-imstadt-nach-morbach-90-km-landstraße-80-kmh)
-      - [4. Imstadt nach Hundorf (13,4 km, Gemeindestraße, 50 km/h)🚗](#4-imstadt-nach-hundorf-134-km-gemeindestraße-50-kmh)
-      - [5. Imstadt nach Pappstadt (10,5 km, Landstraße, 80 km/h)🚗](#5-imstadt-nach-pappstadt-105-km-landstraße-80-kmh)
-    - [Grafiz](#grafiz)
+    - [Aufgabe 1](#aufgabe-1)
+    - [Aufgabe 2](#aufgabe-2)
+    - [Aufgabe 3](#aufgabe-3)
+    - [Aufgabe 4](#aufgabe-4)
+    - [Aufgabe 5](#aufgabe-5)
+  - [Aufgabe 6](#aufgabe-6)
+    - [Aufgabe 7](#aufgabe-7)
+    - [Berechnung der Fahrzeiten](#berechnung-der-fahrzeiten)
+      - [Gegebene Geschwindigkeiten:](#gegebene-geschwindigkeiten)
+      - [Fahrzeitberechnung](#fahrzeitberechnung)
+        - [1. Imstadt nach Budingen (7 km, Landstraße, 80 km/h)🚗](#1-imstadt-nach-budingen-7-km-landstraße-80-kmh)
+        - [2. Imstadt nach Chelzey (8,2 km, Gemeindestraße, 50 km/h)🚗](#2-imstadt-nach-chelzey-82-km-gemeindestraße-50-kmh)
+        - [3. Imstadt nach Morbach (9,0 km, Landstraße, 80 km/h)🚗](#3-imstadt-nach-morbach-90-km-landstraße-80-kmh)
+        - [4. Imstadt nach Hundorf (13,4 km, Gemeindestraße, 50 km/h)🚗](#4-imstadt-nach-hundorf-134-km-gemeindestraße-50-kmh)
+        - [5. Imstadt nach Pappstadt (10,5 km, Landstraße, 80 km/h)🚗](#5-imstadt-nach-pappstadt-105-km-landstraße-80-kmh)
+  - [Exkurs Probleme lösen](#exkurs-probleme-lösen)
+    - [Aufgabe 1](#aufgabe-1-1)
+    - [Aufgabe 2](#aufgabe-2-1)
+    - [Aufgabe 3](#aufgabe-3-1)
+    - [Aufgabe 4](#aufgabe-4-1)
+  - [Grafiz](#grafiz)
   
 
 ## Plan 0
@@ -593,7 +609,12 @@ flowchart TD
 
 Bearbeite die Karte für ein Routing: Anwenden von Abstraktion und Gleichformen und Achtung: Einbahnstraßen und Kreuzungen beachten! Wähle also für jeden relevanten Punkt, an dem sich die Fahrtrichtung maßgeblich verändert einen Marker (z.B. Zahl, besser Buchstaben), zeichne sie in die Karte und speichere das Ergebnis.
 
-Die Städte bekommen werden mit ihren anfangsbuchstarben abgekürzt und bekommen eine Rechteck ohne Runden:
+**🗺️ Routing-Karte erstellen**
+- Anwenden von Abstraktion und Gleichformen.
+- Einbahnstraßen und Kreuzungen beachten!
+- Markiere relevante Punkte, an denen sich die Fahrtrichtung verändert, mit einem Marker (z. B. Buchstaben).
+- Ortschaften: Rechtecke ohne abgerundete Ecken.
+- Kreuzungen: Abgerundete Ecken.
 
 ```mermaid
 flowchart TD
@@ -607,7 +628,7 @@ flowchart TD
   P(Autobahnkreuz 1) --> |Wird zu| D(1)
 ```
 
-Somit wird die alte Karte zu:
+**🚗 Neue Karte**
 
 ```mermaid
 flowchart TD
@@ -680,11 +701,150 @@ flowchart TD
 
 #### 📌 Aufgabe  2
 
-Erstelle aus den Daten eine abstrakte Karte von Schilda (analog zu den vorangegangenen Karten)
+**🗺️ Abstrakte Karte von Schilda**
+- Städte und Kreuzungen wie in Aufgabe 1 kennzeichnen.
 
+**🚗 Schilda-Karte:**
+
+![Schilda-Karte](./assets/images/schilda-karte.png)
+
+**🚗 Schilda-Karte als Graph:**
+```mermaid
+flowchart TD
+    A[A]
+    E[E]
+    A1(1)
+    A2(2)
+    C[C]
+    A3(3)
+    A4(4)
+    H[H]
+    A5(5)
+    F[F]
+    A6(6)
+    A7(7)
+    A8(8)
+    I[I]
+    J[J]
+    A9(9)
+    L[L]
+    G[G]
+    A11(11)
+    A12(12)
+    A13(13)
+    A14(14)
+    B[B]
+    K[K]
+    A16(16)
+    D[D]
+    A17(17)
+    A18(18)
+
+    A -->|2500| E
+    A14 -->|500| A
+    E -->|3000| A1
+    A2 -->|1500| A1
+    C -->|500| A2
+    A2 -->|2000| I
+    A3 -->|500| C
+    C -->|1500| I
+    A4 -->|250| A3
+    J -->|1000| A3
+    H -->|500| A4
+    A4 -->|1500| J
+    A5 -->|3000| H 
+    A9 -->|500| H
+    F -->|1000|A5 
+    A6 -->|3500| F
+    A -->|3500| A6
+    A7 -->|500| A
+    A8 -->|250| A7
+    A8 -->|2000| E
+    A9 -->|1000| L
+    A5 -->|750| L
+    L -->|500| G
+    G -->|500| A9
+    A11 -->|250| J
+    I -->|500| A11
+    A11 -->|1500| G
+    A12 -->|1500| F
+    A12 -->|1000| G
+    A13 -->|750| A12
+    A7 -->|500| A13
+    B -->|1500| A14
+    A13 -->|1500|B
+    B -->|250| K
+    I -->|250| A16
+    K -->|750| A16
+    A16 -->|1500| D
+    A1 -->|1000| D
+    D -->|750| A17
+    A17 -->|1750| K
+    A17 -->|250| A18
+    A18 -->|2500| E
+    A18 -->|500| A14
+```
+#### 📌 Aufgabe  3
+
+**🏁 Kürzeste Wegstrecken**
+
+Erstelle nun mit den bekannten Methoden drei Tabellen und Abbildungen der Strecken mit den kürzesten Wegstrecken für die jeweiligen Taxi-Unternehmen mit allen anderen Orten (zählt man den Startort mit 0,0 mit so hat jede Tabelle 12 Einträge mit Wegstrecken).
+
+##### 🚕 Startpunkt Adler
+
+| Zielort  | Entfernung (km) |
+| -------- | --------------- |
+| Adler    | 0,0             |
+| Emilio   | 2,5             |
+| Bogart   | 0,5             |
+| Kapitol  | 0,75            |
+| Ilona    | 1,5             |
+| Jorge    | 2,5             |
+| Fromm    | 3,0             |
+| Ludt     | 3,5             |
+| Gozo     | 4,0             |
+| Doge     | 4,5             |
+| Club     | 2,0             |
+| Holunder | 3,5             |
+
+##### 🚕 Startpunkt Kapitol
+
+| Zielort  | Entfernung (km) |
+| -------- | --------------- |
+| Kapitol  | 0,0             |
+| Bogart   | 0,25            |
+| Adler    | 0,75            |
+| Emilio   | 3,25            |
+| Ilona    | 0,5             |
+| Jorge    | 1,5             |
+| Fromm    | 2,0             |
+| Ludt     | 2,5             |
+| Gozo     | 3,0             |
+| Doge     | 3,75            |
+| Club     | 1,25            |
+| Holunder | 2,75            |
+
+##### 🚕 Startpunkt Fromm
+
+| Zielort  | Entfernung (km) |
+| -------- | --------------- |
+| Fromm    | 0,0             |
+| Ludt     | 0,5             |
+| Gozo     | 1,0             |
+| Jorge    | 2,5             |
+| Ilona    | 3,0             |
+| Kapitol  | 3,5             |
+| Bogart   | 3,75            |
+| Adler    | 4,25            |
+| Emilio   | 6,75            |
+| Doge     | 4,75            |
+| Club     | 3,25            |
+| Holunder | 2,5             |
 
 
 ## Exkurs Graph 
+### Aufgabe 1
+
 ```
     o
    /|\
@@ -704,7 +864,7 @@ Um alle möglichen Wege zu erfassen, muss dies 𝑛 − 1 mal durchgeführt werd
 **Formel:** ( 𝑛 − 1 ) ⋅ ( 𝑛 − 1 ) ! = 6 ⋅ 720 = 4320.
 
 ---
-
+### Aufgabe 2
 **Die Formel lautet🔢** ( 𝑛 − 1 ) ⋅ ( 𝑛 − 1 ) !:  
 Für 𝑛 = 10: ( 10 − 1 ) ⋅ ( 10 − 1 ) ! = 9 ⋅ 9 ! = 9 ⋅ 362,880 = 3,265,920.  
 Für 𝑛 = 20: ( 20 − 1 ) ⋅ ( 20 − 1 ) ! = 19 ⋅ 19 !.  
@@ -714,11 +874,11 @@ Dann multiplizieren wir mit 19:
 19 ⋅ 19 ! = 2,310,079,200,000,000,000.
 
 ---
-
+### Aufgabe 3
 **Ein Googol ∞** ist eine sehr große Zahl, die als 10^100 definiert ist, also eine 1 gefolgt von 100 Nullen. Sie wurde von Mathematiker Edward Kasner eingeführt, um extrem große Zahlen zu veranschaulichen. Ein Googol ist viel größer als die Anzahl der Atome im sichtbaren Universum. Der Begriff wurde auch als Inspiration für den Namen der Suchmaschine Google verwendet.
 
 ---
-
+### Aufgabe 4
 **Berechnung 📈** für 𝑛 = 7:  
 Summe = ( 7 − 1 ) ⋅ 7² = 6 ⋅ 49 = 294.  
 Der Dijkstra-Algorithmus benötigt für 𝑛 = 7 also 21 Schritte.
@@ -743,7 +903,7 @@ Für 𝑛 = 15: 105 Schritte.
 Der Aufwand wächst hierbei linear, im Gegensatz zur exponentiellen Wachstumskurve beim Brute-Force-Ansatz.
 
 ---
-
+### Aufgabe 5
 **Das Travelling Salesman Problem 🌐 (TSP)**  
 Das TSP ist ein bekanntes Problem in der Informatik und Mathematik. Dabei geht es darum, dass ein Handelsreisender den kürzesten Weg finden soll, um eine bestimmte Anzahl von Städten genau einmal zu besuchen und am Ende wieder an den Ausgangspunkt zurückzukehren.  
 Das Problem wird oft in der Graphentheorie beschrieben, bei der Städte als Knoten und Verbindungen als Kanten dargestellt werden.
@@ -753,7 +913,7 @@ Das Problem wird oft in der Graphentheorie beschrieben, bei der Städte als Knot
 **Das TSP 🌐** gehört zu den sogenannten NP-schweren Problemen. Das bedeutet, dass es sehr schwer ist, eine optimale Lösung für große Instanzen des Problems zu finden. Für solche Probleme gibt es keine bekannten schnellen Algorithmen, die sie für beliebige Eingaben effizient lösen können. Es wurde gezeigt, dass das TSP mit den NP-vollständigen Problemen verwandt ist, die ebenfalls zu den schwierigsten Problemen in der Informatik zählen. Das macht das TSP besonders herausfordernd und gleichzeitig wichtig für viele Anwendungen wie Logistik, Routenplanung oder Netzwerkdesign.
 
 ---
-
+## Aufgabe 6
 **Die Frage 🕵️‍♂️ P=NP?**  
 ist eines der größten ungelösten Probleme der Informatik. Es geht darum, ob Probleme, die sich leicht überprüfen lassen (NP), auch genauso leicht lösbar sind (P). Bis heute hat niemand eine Antwort darauf gefunden.
 
@@ -767,21 +927,21 @@ Der Text macht aber auch deutlich, dass "NP" eigentlich nicht "nicht praktisch l
 **Zusammengefasst📝:**  
 Die Frage ist eine der wichtigsten Herausforderungen in der Informatik und könnte viele schwierige Probleme auf einmal klären.
 
-
+### Aufgabe 7
 **Berechne📈** nun die Zeit für eine Fahrt von Imstadt nach Budingen
 
 
-## Berechnung der Fahrzeiten
+### Berechnung der Fahrzeiten
 
 Wir berechnen die Fahrzeiten für die verschiedenen Streckenabschnitte, wobei wir die Geschwindigkeit und mögliche Ortsdurchfahrten berücksichtigen.
 
-### Gegebene Geschwindigkeiten:
+#### Gegebene Geschwindigkeiten:
 - **Autobahnen**: 130 km/h
 - **Landstraße** (gelb, rot): 80 km/h
 - **Gemeindestraßen** (weiß): 50 km/h
 - **Ortsdurchfahrten**: Zusätzliche 8 Minuten (gilt auch bei Autobahnen, wenn sie einen Ort durchqueren)
 
-### Fahrzeitberechnung
+#### Fahrzeitberechnung
 
 Die **Fahrzeit (in Stunden)** wird berechnet mit der Formel:
 
@@ -791,31 +951,31 @@ $$
 
 Falls die Strecke durch eine **Ortsdurchfahrt** führt, fügen wir 8 Minuten hinzu.
 
-#### 1. Imstadt nach Budingen (7 km, Landstraße, 80 km/h)🚗
+##### 1. Imstadt nach Budingen (7 km, Landstraße, 80 km/h)🚗
 
 $$
 \text{Fahrzeit} = \frac{7 \, \text{km}}{80 \, \text{km/h}} = 0,0875 \, \text{Stunden} = 5,25 \, \text{Minuten}
 $$
 
-#### 2. Imstadt nach Chelzey (8,2 km, Gemeindestraße, 50 km/h)🚗
+##### 2. Imstadt nach Chelzey (8,2 km, Gemeindestraße, 50 km/h)🚗
 
 $$
 \text{Fahrzeit} = \frac{8,2 \, \text{km}}{50 \, \text{km/h}} = 0,164 \, \text{Stunden} = 9,84 \, \text{Minuten}
 $$
 
-#### 3. Imstadt nach Morbach (9,0 km, Landstraße, 80 km/h)🚗
+##### 3. Imstadt nach Morbach (9,0 km, Landstraße, 80 km/h)🚗
 
 $$
 \text{Fahrzeit} = \frac{9,0 \, \text{km}}{80 \, \text{km/h}} = 0,1125 \, \text{Stunden} = 6,75 \, \text{Minuten}
 $$
 
-#### 4. Imstadt nach Hundorf (13,4 km, Gemeindestraße, 50 km/h)🚗
+##### 4. Imstadt nach Hundorf (13,4 km, Gemeindestraße, 50 km/h)🚗
 
 $$
 \text{Fahrzeit} = \frac{13,4 \, \text{km}}{50 \, \text{km/h}} = 0,268 \, \text{Stunden} = 16,08 \, \text{Minuten}
 $$
 
-#### 5. Imstadt nach Pappstadt (10,5 km, Landstraße, 80 km/h)🚗
+##### 5. Imstadt nach Pappstadt (10,5 km, Landstraße, 80 km/h)🚗
 
 $$
 \text{Fahrzeit} = \frac{10,5 \, \text{km}}{80 \, \text{km/h}} = 0,13125 \, \text{Stunden} = 7,875 \, \text{Minuten}
@@ -823,9 +983,10 @@ $$
 
 **Antwort💬** Der Weg von Imstadt nach Budingen ist der richtige, und der Algorithmus muss nicht weiter nach einem kürzeren oder schnelleren Weg suchen, da dieser bereits die optimale Lösung darstellt.
 
-**Exkurs Probleme lösen**
+## Exkurs Probleme lösen
 
-**Aufgabe 1💻**
+### Aufgabe 1
+**Nachvollziehen💻**
 
 ![PAP](./assets/images/PAP_Abb.png)
 
@@ -842,7 +1003,7 @@ $$
 | Implementierung                      | Der Algorithmus wurde in eine Programmiersprache umgesetzt                                     |
 | Programm                             | Das fertige Programm berechnet die kürzesten Wege in einem Graphen                             |
 
-
+### Aufgabe 2
 **Pseudocode 💻**
 
 ```
@@ -864,7 +1025,7 @@ Funktion Suche(Stadt, aktuelleEntfernung)
     Lösche Kennzahl(Stadt)
 ```
 
-
+### Aufgabe 3
 
 **Dreiecksungleichung**
 
@@ -872,6 +1033,7 @@ Funktion Suche(Stadt, aktuelleEntfernung)
 
 **Die Regel📜** hängt damit zusammen, dass die kürzeste Verbindung zwischen zwei Punkten immer eine gerade Linie ist. Wenn du zwei Punkte über einen Zwischenpunkt verbindest (wie bei einem Umweg), dann wird der Weg immer länger oder gleich lang, aber niemals kürzer.
 
+### Aufgabe 4
 ```mermaid
 graph TD
     A((A: Startpunkt)) -->|AL| L((L: Landmarke))
@@ -890,5 +1052,6 @@ graph TD
 
 ```
 
-### Grafiz
+## Grafiz
 [Graf-iz](./assets/graphiz/Vorlage_Graf-iz%20OzD.pdf)
+
