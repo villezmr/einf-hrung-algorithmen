@@ -28,18 +28,10 @@
           - [🔍 Wie funktioniert der Dijkstra-Algorithmus?](#-wie-funktioniert-der-dijkstra-algorithmus)
           - [📋 Schritte:](#-schritte)
     - [Tiefgang 4 von Lupera (J) nach Eindhofen (E)](#tiefgang-4-von-lupera-j-nach-eindhofen-e)
-      - [Ausgangssituation](#ausgangssituation)
-        - [Schritte des Verfahrens](#schritte-des-verfahrens)
-          - [1. **Startpunkt markieren**](#1-startpunkt-markieren)
-          - [2. **Nachbarstädte untersuchen**](#2-nachbarstädte-untersuchen)
-          - [3. **Strecken von AK2**](#3-strecken-von-ak2)
-          - [4. **Strecken von K**](#4-strecken-von-k)
-          - [5. **Strecken von AK3**](#5-strecken-von-ak3)
-          - [6. **Strecken von O**](#6-strecken-von-o)
-          - [Ergebnis](#ergebnis)
-          - [Grafische Darstellung](#grafische-darstellung)
+      - [Grafische Darstellung](#grafische-darstellung)
     - [Tiefgang 5](#tiefgang-5)
   - [Exkurs Graph](#exkurs-graph)
+  - [Berechnung der Fahrzeiten](#berechnung-der-fahrzeiten)
     - [Gegebene Geschwindigkeiten:](#gegebene-geschwindigkeiten)
     - [Fahrzeitberechnung](#fahrzeitberechnung)
       - [1. Imstadt nach Budingen (7 km, Landstraße, 80 km/h)](#1-imstadt-nach-budingen-7-km-landstraße-80-kmh)
@@ -472,92 +464,38 @@ flowchart TD
 
 ### Tiefgang 4 von Lupera (J) nach Eindhofen (E)
 
-#### Ausgangssituation  
-Der Dijkstra-Algorithmus wird verwendet, um den kürzesten Weg von **J** (Startpunkt) nach **E** (Zielpunkt) in einem gewichteten Graphen zu bestimmen. Dabei werden alle Nachbarstädte der aktuellen Stadt geprüft und die kürzeste Strecke durch Summation der bereits berechneten Kennzahl mit der Länge der Verbindung ermittelt. Die optimale Route wird schrittweise aufgebaut, indem alle erreichbaren Wege berücksichtigt werden.
+1. **Starte in der Stadt J**:
+   - Markiere die Stadt **J** **rot** und weise ihr die Kennzahl **0** zu.
+   - Bezeichne **J** als **aktuelle Stadt**.
+
+2. **Bearbeite alle Nachbarstädte der aktuellen Stadt**:
+   - Gehe zu allen direkt erreichbaren **Nachbarstädten**, die **noch nicht rot markiert** sind.
+   - Führe für jede Nachbarstadt die folgenden Schritte aus:
+     1. Berechne die **Summe** aus der Kennzahl der aktuellen Stadt (rote Zahl) und der **Streckenlänge** zur Nachbarstadt.
+     2. Überprüfe die Nachbarstadt:
+        - **Keine Kennzahl vorhanden**: Weise die berechnete Summe als neue Kennzahl zu. Markiere die Strecke zur aktuellen Stadt.
+        - **Kennzahl kleiner oder gleich der Summe**: Nichts tun.
+        - **Kennzahl größer als die Summe**: Lösche die bisherige Kennzahl und die Markierung zur bisherigen Stadt. Markiere die Strecke zur aktuellen Stadt neu.
+
+3. **Wähle die nächste Stadt**:
+   - Betrachte alle Städte, die bereits eine **rote Kennzahl** haben, aber noch nicht **rot markiert** sind.
+   - Suche die Stadt mit der **kleinsten Kennzahl**.
+     - Falls mehrere Städte die **gleiche kleinste Kennzahl** haben, wähle eine davon **beliebig** aus.
+
+4. **Markiere die nächste Stadt**:
+   - Bezeichne die Stadt mit der kleinsten Kennzahl als **aktuelle Stadt**.
+   - Markiere die Stadt **rot** und zeichne die zugehörige Strecke komplett **rot** nach.
+
+5. **Überprüfe das Ziel**:
+   - Falls die **Zielstadt E** noch **nicht rot markiert** ist, kehre zurück zu **Schritt 2** (While-Loop).
+
+6. **Ende des Algorithmus**:
+   - Sobald die Zielstadt **E rot markiert** ist, endet der Algorithmus.
+   - Der kürzeste Weg von Stadt **J** nach Stadt **E** wurde erfolgreich gefunden.
 
 ---
 
-##### Schritte des Verfahrens  
-
-###### 1. **Startpunkt markieren**  
-Die Startstadt **J** erhält die Kennzahl 0 und wird zur **aktuellen Stadt**.
-
----
-
-###### 2. **Nachbarstädte untersuchen**  
-Von der aktuellen Stadt **J** aus werden die Nachbarstädte geprüft:  
-- **J → AK2** (7,8)  
-- **J → N** (18,9)  
-
-Die **Summe** der aktuellen Kennzahl (0) und der Streckenlängen wird berechnet:  
-- **AK2**: \( 0 + 7,8 = 7,8 \)  
-- **N**: \( 0 + 18,9 = 18,9 \)  
-
-Die kleinere Kennzahl (**7,8**) wird markiert. **AK2** wird als nächste Stadt ausgewählt.
-
----
-
-###### 3. **Strecken von AK2**  
-Von **AK2** aus werden folgende Nachbarn untersucht:  
-- **AK2 → K** (6,2)  
-
-Die Kennzahl für **K** wird berechnet:  
-\( 7,8 + 6,2 = 14,0 \).  
-
-Da **K** noch nicht markiert ist, wird sie mit **14,0** versehen.
-
----
-
-###### 4. **Strecken von K**  
-Von **K** aus werden Nachbarstädte geprüft:  
-- **K → AK3** (4,9)  
-- **K → N** (13,0)  
-
-Berechnungen:  
-- **AK3**: \( 14,0 + 4,9 = 18,9 \)  
-- **N**: \( 14,0 + 13,0 = 27,0 \)  
-
-**AK3** erhält die Kennzahl **18,9** (besser als N).
-
----
-
-###### 5. **Strecken von AK3**  
-Von **AK3** aus:  
-- **AK3 → O** (6,4)  
-
-Berechnung:  
-\( 18,9 + 6,4 = 25,3 \).  
-**O** wird markiert mit **25,3**.
-
----
-
-###### 6. **Strecken von O**  
-Von **O** aus:  
-- **O → E** (direkte Verbindung)  
-
-Berechnung:  
-\( 25,3 + 5,8 = 31,1 \).
-
----
-
-###### Ergebnis  
-Der kürzeste Weg von **J** nach **E** beträgt **31,1** Einheiten. Der Algorithmus hat dabei verschiedene Pfade untersucht, um die optimale Route zu finden.
-
----
-
-###### Grafische Darstellung  
-1. Makiere die Startstadt (J) Rot weise ihr die Kennzahl 0 zu Bezeichen dies als aktuellen Stadt.
-2. Gehe aus von der aktuellen Stadt zu allen direkt erreichbaren Nachbarstädte  
-   1. znd führe das folgende für jede Nachbarsatdt durch, die noch nicht rot makiert ist:
-      1. Errechne die Summe au der roten Kenntahl an der aktuellen Stadt und der Streckenlänge zur Nachbarstadt
-         - Hat die Nachbarstadt keine Kennzahl weise ihr die Summe als Kennzahl zu. Makiere die Strecke zur aktuellen Stadt.
-         - Hat die Nachbarstast eine Kennzahl kleiner oder gleich der Summe mache nichts
-         - Hat die Nachbarstadt eine Kennzahl größer der Summe Streiche die dortige Kennzahl sowie die Makierung zu Makiere die Stecke zur aktuellen Stadt
-3. Betrachte alle STädte, die zwar eine rote Kennzahl haben aber nicht Rot Makiert sind. Suche die kleinste Kennzahl.
-4. Bezeichne diese als aktuelle Stadt. Weise mehre Städte die kleinste Kennzahl auf, wähle eine belibige davon.
-5. Makiere die aktuelle stadt Rot, zeichne die dort makierte Strecke komplett rot nach.
-6. Falls die Ziel stadt noch nicht rot makiert ist, weiter bei Schritt 2.(While-Loop)
-
+#### Grafische Darstellung  
 
 ```mermaid
 flowchart TD
@@ -721,6 +659,9 @@ Die Frage ist eine der wichtigsten Herausforderungen in der Informatik und könn
 **Berechne📈** nun die Zeit für eine Fahrt von Imstadt nach Budingen
 
 
+## Berechnung der Fahrzeiten
+
+Wir berechnen die Fahrzeiten für die verschiedenen Streckenabschnitte, wobei wir die Geschwindigkeit und mögliche Ortsdurchfahrten berücksichtigen.
 
 ### Gegebene Geschwindigkeiten:
 - **Autobahnen**: 130 km/h
@@ -732,41 +673,42 @@ Die Frage ist eine der wichtigsten Herausforderungen in der Informatik und könn
 
 Die **Fahrzeit (in Stunden)** wird berechnet mit der Formel:
 
-\[
+$$
 \text{Fahrzeit (in Stunden)} = \frac{\text{Streckenlänge (in km)}}{\text{Geschwindigkeit (in km/h)}}
-\]
+$$
 
 Falls die Strecke durch eine **Ortsdurchfahrt** führt, fügen wir 8 Minuten hinzu.
 
 #### 1. Imstadt nach Budingen (7 km, Landstraße, 80 km/h)
 
-\[
+$$
 \text{Fahrzeit} = \frac{7 \, \text{km}}{80 \, \text{km/h}} = 0,0875 \, \text{Stunden} = 5,25 \, \text{Minuten}
-\]
+$$
 
 #### 2. Imstadt nach Chelzey (8,2 km, Gemeindestraße, 50 km/h)
 
-\[
+$$
 \text{Fahrzeit} = \frac{8,2 \, \text{km}}{50 \, \text{km/h}} = 0,164 \, \text{Stunden} = 9,84 \, \text{Minuten}
-\]
+$$
 
 #### 3. Imstadt nach Morbach (9,0 km, Landstraße, 80 km/h)
 
-\[
+$$
 \text{Fahrzeit} = \frac{9,0 \, \text{km}}{80 \, \text{km/h}} = 0,1125 \, \text{Stunden} = 6,75 \, \text{Minuten}
-\]
+$$
 
 #### 4. Imstadt nach Hundorf (13,4 km, Gemeindestraße, 50 km/h)
 
-\[
+$$
 \text{Fahrzeit} = \frac{13,4 \, \text{km}}{50 \, \text{km/h}} = 0,268 \, \text{Stunden} = 16,08 \, \text{Minuten}
-\]
+$$
 
 #### 5. Imstadt nach Pappstadt (10,5 km, Landstraße, 80 km/h)
 
-\[
+$$
 \text{Fahrzeit} = \frac{10,5 \, \text{km}}{80 \, \text{km/h}} = 0,13125 \, \text{Stunden} = 7,875 \, \text{Minuten}
-\]
+$$
 
 ### Hinweis zu Ortsdurchfahrten:
 Falls eine der Strecken eine Ortsdurchfahrt enthält, müssen wir zusätzlich 8 Minuten berücksichtigen. Wir haben diese Information aber noch nicht für jede Strecke.
+
