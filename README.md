@@ -1,4 +1,33 @@
-# ePortfolio
+<div align="center">
+
+# **Abenteuer Informatik**
+
+## **ePortfolio**  
+Einführung ins Thema Algorithmen
+
+![ozd logo](https://www.ozd-luebeck.de/files/theme/images/header/logo-ozd.png)  
+*Name der Schule*
+
+---
+
+### **Fach:**  
+*Informatik*
+
+### **Klasse:**  
+*EW*  
+
+### **Lehrer/in:**  
+*Herr Stefan Thielke*  
+
+---
+
+### **Erstellt von:**  
+**Ville Joona Zeumer**  
+
+### **Abgabedatum:**  
+*18. Dezember 2024*  
+
+</div>
 
 - [ePortfolio](#eportfolio)
   - [Plan 0](#plan-0)
